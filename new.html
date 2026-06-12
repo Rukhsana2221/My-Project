@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Form</title>
+
+<!-- EmailJS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f4f4f4;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    width:300px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h2{
+    text-align:center;
+}
+
+input, textarea{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    background:#28a745;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#218838;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Contact Form</h2>
+
+    <form id="contact-form">
+        <input type="text" name="user_name" placeholder="Your Name" required>
+        <input type="email" name="user_email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+</div>
+
+<script>
+// 🔥 STEP 1: EmailJS init
+(function(){
+    emailjs.init("u3-9fxOO9QDwCdBMu"); // <-- yahan apni Public Key lagao
+})();
+
+// 🔥 STEP 2: Form submit
+document.getElementById("contact-form")
+.addEventListener("submit", function(event){
+    event.preventDefault();
+
+    emailjs.sendForm(
+        "service_kdmoeqh",   // <-- apna Service ID
+        "template_0qz46qc",  // <-- apna Template ID
+        this
+    )
+    .then(function(){
+        alert("Message Sent Successfully ✅");
+    }, function(error){
+        alert("Failed ❌ " + JSON.stringify(error));
+    });
+});
+</script>
+
+</body>
+</html>
