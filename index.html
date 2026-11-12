@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS PrepHub | CSS Preparation Platform</title>
+<meta name="description" content="CSS PrepHub — CSS past papers, CSS MPT past papers, syllabus, notes and books in one responsive platform.">
+
+<!-- Google Analytics: replace G-XXXXXXXXXX with your real Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments)}
+gtag('js',new Date());
+gtag('config','G-XXXXXXXXXX',{send_page_view:false});
+</script>
+
+<style>
+/* =========================================================
+   1. GLOBAL STYLES AND COLOURS
+   ========================================================= */
+:root{
+  --navy:#071a33;
+  --navy-light:#153f70;
+  --blue:#1769e0;
+  --blue-light:#eaf2ff;
+  --gold:#d8ad55;
+  --gold-light:#f0d28f;
+  --page:#f3f6fb;
+  --text:#172033;
+  --muted:#687386;
+  --border:#e1e7f0;
+  --white:#fff;
+  --shadow:0 10px 30px #071a3310;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--page);color:var(--text);line-height:1.6}
+a{text-decoration:none;color:inherit}
+button{font:inherit;cursor:pointer}
+button:disabled{opacity:.65;cursor:wait}
+.container{width:92%;max-width:1200px;margin:0 auto}
+.section{padding:65px 0}
+.section-title{text-align:center;margin-bottom:35px}
+.section-title h2{font-size:32px;color:var(--navy);margin-bottom:9px}
+.section-title p{color:var(--muted);max-width:700px;margin:auto}
+.page{display:none;min-height:calc(100vh - 75px)}
+body.page-home .page-home,
+body.page-about .page-about,
+body.page-subjects .page-subjects,
+body.page-syllabus .page-syllabus,
+body.page-mpt .page-mpt,
+body.page-notes .page-notes,
+body.page-books .page-books,
+body.page-feedback .page-feedback,
+body.page-faq .page-faq{display:block}
+.page-header{background:linear-gradient(105deg,var(--navy),var(--navy-light));color:var(--white);padding:55px 0;text-align:center}
+.page-header h1{font-size:40px;margin-bottom:8px}
+.page-header p{color:#dfe7f3}
+.small-btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:8px;padding:10px 14px;font-size:12px;font-weight:700;white-space:nowrap}
+.view-btn{background:#e5efff;color:var(--blue)}
+.view-btn:hover{background:var(--blue);color:var(--white)}
+.download-btn{background:var(--gold);color:var(--navy)}
+.download-btn:hover{background:var(--gold-light)}
+.card,.about-box,.pdf-box,.feedback-form{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:26px;box-shadow:var(--shadow)}
+.card h3{color:var(--navy);margin-bottom:8px}
+.card p{font-size:14px;color:var(--muted)}
+.card-icon{width:55px;height:55px;border-radius:12px;background:var(--blue-light);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:25px;margin-bottom:17px}
+
+/* =========================================================
+   2. NAVIGATION
+   ========================================================= */
+header{position:sticky;top:0;z-index:1000;background:linear-gradient(105deg,var(--navy),var(--navy-light));box-shadow:0 3px 15px #0002;border-bottom:3px solid var(--gold)}
+.navbar{min-height:75px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{color:var(--white);font-size:25px;font-weight:800;white-space:nowrap}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+.nav-links a{color:var(--white);padding:27px 10px 22px;font-size:13px;font-weight:700;position:relative;transition:.25s;display:block}
+.nav-links a:hover,.nav-links a.active{color:#ffd36f}
+.nav-links a.active:after{content:"";position:absolute;left:10px;right:10px;bottom:14px;height:3px;background:var(--gold);border-radius:10px}
+.menu-toggle{display:none}
+.menu-icon{display:none;color:white;font-size:27px;cursor:pointer}
+
+/* =========================================================
+   3. HOME PAGE
+   ========================================================= */
+.home-hero{min-height:620px;display:flex;align-items:center;overflow:hidden;background:radial-gradient(circle at 85% 15%,#d8ad5540,transparent 24%),radial-gradient(circle at 10% 90%,#1769e038,transparent 30%),linear-gradient(135deg,#041326,var(--navy) 45%,#103e78);color:var(--white)}
+.home-hero-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center;padding:80px 0}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;padding:8px 15px;border:1px solid #d8ad5566;background:#d8ad551a;color:var(--gold-light);border-radius:50px;font-size:13px;font-weight:700;margin-bottom:22px}
+.hero-badge span{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.home-hero h1{font-size:56px;line-height:1.12;letter-spacing:-1.8px;margin-bottom:22px}
+.gold{color:var(--gold)}.blue{color:#66a8ff}
+.home-hero-text{max-width:670px;color:#d7e2f2;font-size:17px;line-height:1.8;margin-bottom:28px}
+.home-buttons{display:flex;gap:13px;flex-wrap:wrap}
+.home-btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 22px;border-radius:8px;font-weight:700;font-size:14px;transition:.25s}
+.home-btn-primary{background:var(--gold);color:var(--navy)}
+.home-btn-primary:hover{background:var(--gold-light);transform:translateY(-2px)}
+.home-btn-outline{border:1px solid #ffffff8c;color:white;background:#ffffff0d}
+.home-btn-outline:hover{background:white;color:var(--navy)}
+.hero-visual{position:relative;min-height:380px;display:flex;align-items:center;justify-content:center}
+.hero-circle{position:absolute;width:330px;height:330px;border-radius:50%;border:1px solid #d8ad5540}
+.hero-circle:before{content:"";position:absolute;inset:25px;border-radius:50%;border:1px dashed #ffffff30}
+.hero-dashboard{position:relative;width:320px;background:#fffffff7;border-radius:18px;padding:22px;color:var(--navy);box-shadow:0 25px 70px #0005;transform:rotate(2deg)}
+.dashboard-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:18px}
+.dashboard-logo{font-size:16px;font-weight:800}.dashboard-logo span{color:var(--blue)}
+.dashboard-status{font-size:10px;padding:5px 9px;background:var(--blue-light);color:var(--blue);border-radius:20px;font-weight:700}
+.dashboard-main{background:linear-gradient(135deg,var(--navy),var(--blue));color:white;border-radius:13px;padding:22px;margin-bottom:16px}
+.dashboard-main small{color:#c9d8ee;font-size:11px}.dashboard-main h3{font-size:24px;margin-top:6px}
+.dashboard-line{height:7px;background:#ffffff30;border-radius:20px;margin-top:18px}
+.dashboard-line span{display:block;width:72%;height:100%;background:var(--gold);border-radius:20px}
+.dashboard-items{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dashboard-item{border:1px solid #e4e9f1;border-radius:10px;padding:12px;background:white}
+.dashboard-item strong{display:block;font-size:12px}.dashboard-item small{color:#7a8493;font-size:10px}
+.home-stats{position:relative;z-index:5;margin-top:-35px}
+.home-stats-box{background:white;border-radius:15px;box-shadow:0 15px 45px #071a331f;display:grid;grid-template-columns:repeat(4,1fr);overflow:hidden;border:1px solid #e7ebf2}
+.home-stat{text-align:center;padding:22px 12px;border-right:1px solid #e7ebf2}
+.home-stat:last-child{border:0}.home-stat strong{display:block;color:var(--navy);font-size:25px}.home-stat span{color:#788394;font-size:12px;font-weight:600}
+.home-resources,.home-cta{padding:75px 0}
+.home-section-heading{text-align:center;max-width:720px;margin:0 auto 38px}
+.home-section-label{color:var(--blue);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:2px;margin-bottom:9px}
+.home-section-heading h2{font-size:36px;color:var(--navy);margin-bottom:12px}
+.home-section-heading p{color:var(--muted);font-size:15px}
+.home-resource-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.home-resource-card{background:white;border:1px solid var(--border);border-radius:14px;padding:26px;box-shadow:var(--shadow);transition:.25s}
+.home-resource-card:hover,.card:hover{transform:translateY(-5px);box-shadow:0 15px 35px #071a331c}
+.home-resource-card h3{color:var(--navy);margin-bottom:8px}
+.home-resource-card p{color:var(--muted);font-size:14px}
+.home-resource-link{display:inline-block;color:var(--blue);font-size:12px;font-weight:800;margin-top:15px}
+.home-why{background:white;padding:75px 0}
+.home-why-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:55px;align-items:center}
+.home-why-visual{min-height:320px;border-radius:20px;background:radial-gradient(circle at 80% 20%,#d8ad5540,transparent 28%),linear-gradient(145deg,var(--navy),#103e78);display:flex;align-items:center;justify-content:center;color:white}
+.why-center{width:145px;height:145px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:800;font-size:22px}
+.why-center span{color:var(--gold)}
+.home-why-content h2{font-size:34px;color:var(--navy);margin-bottom:15px}
+.home-why-content>p{color:var(--muted);margin-bottom:22px}
+.why-list{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.why-item{display:flex;gap:10px}
+.why-check{flex-shrink:0;width:25px;height:25px;border-radius:50%;background:var(--blue-light);color:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:900}
+.why-item strong{display:block;color:var(--navy);font-size:13px}.why-item span{display:block;color:#7a8493;font-size:11px}
+.home-cta-box{border-radius:20px;background:radial-gradient(circle at 85% 30%,#d8ad5533,transparent 25%),linear-gradient(120deg,var(--navy),var(--blue));padding:45px 50px;color:white;display:flex;align-items:center;justify-content:space-between;gap:25px}
+.home-cta-content h2{font-size:30px;margin-bottom:8px}.home-cta-content p{color:#d5e0ef;font-size:14px}
+
+/* =========================================================
+   4. ABOUT PAGE
+   ========================================================= */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:stretch}
+.about-box h2{color:var(--navy);margin-bottom:14px;font-size:29px}
+.about-box p{color:#5f6979;margin-bottom:14px}
+.feature-list{list-style:none;margin-top:18px}
+.feature-list li{margin:10px 0;padding-left:24px;position:relative}
+.feature-list li:before{content:"✓";position:absolute;left:0;color:var(--blue);font-weight:bold}
+
+/* =========================================================
+   5. CSS PAST PAPERS
+   ========================================================= */
+.subject-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.subject-card{background:white;border:1px solid #dce5f1;border-radius:12px;padding:23px;cursor:pointer;transition:.25s}
+.subject-card:hover{border-color:var(--blue);transform:translateY(-3px)}
+.subject-card h3{color:var(--navy);margin-bottom:7px}.subject-card p{font-size:13px;color:#707a8a}
+.back-btn{margin-bottom:25px;background:var(--navy);color:white;border:0;padding:11px 18px;border-radius:6px}
+.back-btn:hover{background:var(--blue)}
+.subject-section{display:none}.subject-section.active{display:block}
+.optional-title{margin:45px 0 22px}
+.optional-title h2{color:var(--navy);font-size:29px}
+.optional-groups-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.optional-group{background:white;border:1px solid #d9e3f0;border-radius:22px;padding:28px 26px;box-shadow:0 10px 30px #071a3308;min-width:0}
+.optional-group h3{color:var(--navy);font-size:24px;margin-bottom:17px}
+.optional-list{display:grid;gap:11px}
+.optional-item{background:#f6f9fe;border:1px solid #dfe8f5;border-radius:13px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;min-width:0}
+.optional-item span{font-weight:600;font-size:15px;color:#31435d}
+.year-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+/* CSS MPT: simple box layout (not the general year-card design) */
+#mptYearGrid{grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.mpt-paper-box{min-width:0;background:#fff;border:2px solid var(--gold);border-radius:0;padding:22px 12px;text-align:center;box-shadow:none;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:13px}
+.mpt-paper-name{font-size:16px;font-weight:800;color:var(--navy);line-height:1.35}
+.mpt-paper-year{font-size:27px;font-weight:800;color:var(--blue);line-height:1.2}
+.mpt-paper-box .year-buttons{gap:7px}
+@media(max-width:1100px){#mptYearGrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){#mptYearGrid{grid-template-columns:repeat(1,minmax(0,1fr))}.mpt-paper-box{padding:18px 14px}.mpt-paper-box .year-buttons{justify-content:center}}
+.year-card{background:white;border:1px solid #e0e6ef;border-radius:10px;padding:22px;text-align:center}
+.year-card h3{color:var(--navy);margin-bottom:13px;font-size:24px}
+.year-buttons{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.pdf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pdf-box{text-align:center}
+.pdf-box h3{color:var(--navy);margin-bottom:9px}
+.pdf-box p{color:#737d8d;font-size:13px;margin-bottom:17px}
+.pdf-buttons{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.pdf-error{max-width:700px;margin:25px auto;padding:20px;background:white;border:1px solid var(--border);border-radius:10px;text-align:center;color:var(--navy)}
+.pdf-error strong{display:block;margin-bottom:8px}
+.pdf-error code{display:block;margin-top:10px;padding:10px;background:#f0f3f7;border-radius:5px;word-break:break-all}
+
+/* =========================================================
+   6. FAQ PAGE — NEW ACCORDION DESIGN
+   ========================================================= */
+.faq-intro{max-width:760px;margin:0 auto 30px;text-align:center}
+.faq-intro .eyebrow{display:inline-block;background:#eaf2ff;color:var(--blue);padding:7px 13px;border-radius:30px;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+.faq-intro h2{color:var(--navy);font-size:30px;margin-bottom:8px}
+.faq-intro p{color:var(--muted)}
+.faq-list{max-width:900px;margin:auto;display:grid;gap:14px}
+.faq-item{background:white;border:1px solid #e0e7f1;border-radius:14px;overflow:hidden;box-shadow:0 5px 18px #071a3308;transition:border-color .25s,box-shadow .25s}
+.faq-item:hover{border-color:#b7cbed;box-shadow:0 10px 25px #071a3310}
+.faq-item.open{border-color:#9dbded;box-shadow:0 12px 28px #1769e014}
+.faq-question{width:100%;border:0;background:white;padding:19px 21px;display:flex;align-items:center;justify-content:space-between;gap:18px;text-align:left;color:var(--navy);font-size:16px;font-weight:700;line-height:1.45}
+.faq-question-text{display:flex;align-items:center;gap:14px}
+.faq-number{flex:0 0 34px;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#eaf2ff,#dce9ff);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+.faq-toggle{flex:0 0 32px;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--navy);color:white;font-size:21px;font-weight:400;transition:transform .25s,background .25s}
+.faq-item.open .faq-toggle{background:var(--blue);transform:rotate(180deg)}
+.faq-answer{display:none;padding:0 70px 22px;color:#667287;font-size:14px;line-height:1.85}
+.faq-item.open .faq-answer{display:block}
+.faq-answer strong{color:var(--navy)}
+.faq-bottom-note{max-width:900px;margin:28px auto 0;padding:19px 22px;border-radius:13px;background:linear-gradient(100deg,#eaf2ff,#fff7e5);border:1px solid #dfe7f3;color:#4b5a70;font-size:14px}
+.faq-bottom-note strong{color:var(--navy)}
+
+/* =========================================================
+   7. FEEDBACK PAGE
+   ========================================================= */
+.feedback-form{max-width:750px;margin:auto;padding:32px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-weight:bold;margin-bottom:7px;color:var(--navy)}
+.form-group input,.form-group select,.form-group textarea{width:100%;border:1px solid #d6dce5;border-radius:7px;padding:12px;outline:none;font-size:14px;background:white}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #1769e014}
+.form-group textarea{min-height:130px;resize:vertical}
+.feedback-message{margin-top:20px}
+.feedback-entry{background:white;border:1px solid var(--border);padding:18px;border-radius:8px;margin-bottom:12px}
+.feedback-entry strong{color:var(--navy)}
+
+/* =========================================================
+   8. PDF VIEWER AND FOOTER
+   ========================================================= */
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:3000;align-items:center;justify-content:center;padding:20px}
+.modal.show{display:flex}
+#pdfModal{padding:0}
+.pdf-viewer{width:100%;height:100vh;background:#111;display:flex;flex-direction:column}
+.pdf-topbar{min-height:58px;background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:0 15px;color:white;gap:10px}
+.pdf-topbar h3{font-size:16px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.pdf-top-buttons{display:flex;gap:8px}
+.pdf-top-buttons a,.pdf-top-buttons button{border:0;padding:8px 12px;border-radius:5px;cursor:pointer;font-weight:bold;font-size:12px}
+.pdf-download{background:var(--gold);color:var(--navy)}
+.pdf-close{background:white;color:var(--navy)}
+#pdfFrame{width:100%;flex:1;border:0;background:white}
+footer{background:var(--navy);color:#dfe7f3;padding:40px 0 20px}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:35px}
+.footer-col h3{color:var(--gold);margin-bottom:14px}
+.footer-col p{font-size:14px;color:#b9c5d5}
+.footer-col ul{list-style:none}
+.footer-col li{margin:8px 0;font-size:14px}
+.footer-col a:hover{color:var(--gold)}
+.copyright{text-align:center;border-top:1px solid #ffffff1f;padding-top:18px;margin-top:30px;font-size:13px;color:#aab6c7}
+
+/* =========================================================
+   9. RESPONSIVE DESIGN
+   ========================================================= */
+@media(max-width:1100px){
+  .nav-links a{padding-left:7px;padding-right:7px;font-size:12px}
+  .home-hero-inner{gap:25px}.home-hero h1{font-size:47px}
+  .home-resource-grid{grid-template-columns:repeat(2,1fr)}
+  .subject-grid,.pdf-grid{grid-template-columns:repeat(2,1fr)}
+  .year-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:850px){
+  .navbar{min-height:68px}
+  .menu-icon{display:block}
+  .nav-links{position:absolute;top:68px;left:0;right:0;background:var(--navy);display:none;flex-direction:column;align-items:stretch;padding:10px 0 15px;max-height:calc(100vh - 68px);overflow:auto}
+  .menu-toggle:checked~.nav-links{display:flex}
+  .nav-links a{padding:12px 25px;font-size:14px}
+  .nav-links a.active:after{display:none}
+  .home-hero-inner{grid-template-columns:1fr;text-align:center;padding:65px 0 75px}
+  .home-hero-text{margin:0 auto 25px}.home-buttons{justify-content:center}
+  .hero-visual{min-height:340px}
+  .home-why-grid,.about-grid{grid-template-columns:1fr}
+  .optional-groups-grid{grid-template-columns:1fr 1fr}
+  .home-cta-box{padding:35px;flex-direction:column;align-items:flex-start}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .container{width:90%}.logo{font-size:21px}
+  .home-hero h1{font-size:36px;letter-spacing:-.8px}
+  .home-hero-text{font-size:15px}
+  .hero-visual{min-height:300px}.hero-circle{width:270px;height:270px}
+  .hero-dashboard{width:280px;padding:17px}
+  .home-stats-box{grid-template-columns:1fr 1fr}
+  .home-stat{padding:18px 8px;border-bottom:1px solid #e7ebf2}
+  .home-stat:nth-child(2){border-right:0}.home-stat strong{font-size:20px}
+  .home-section-heading h2,.home-why-content h2{font-size:28px}
+  .home-resource-grid,.cards,.pdf-grid,.subject-grid,.year-grid,.optional-groups-grid,.footer-grid{grid-template-columns:1fr}
+  .home-resources,.home-why{padding:55px 0}
+  .why-list{grid-template-columns:1fr}
+  .home-cta-content h2{font-size:25px}
+  .page-header h1{font-size:32px}
+  .optional-group{padding:22px 17px}
+  .optional-item{padding:12px;gap:8px}
+  .optional-item span{font-size:13px}
+  .small-btn{padding:9px 10px;font-size:11px}
+  .feedback-form{padding:22px}
+  .pdf-topbar h3{max-width:140px}
+  .faq-intro h2{font-size:25px}
+  .faq-question{padding:15px 13px;font-size:14px;gap:10px}
+  .faq-question-text{gap:10px}
+  .faq-number{flex-basis:30px;width:30px;height:30px}
+  .faq-toggle{flex-basis:29px;width:29px;height:29px}
+  .faq-answer{padding:0 15px 18px 53px;font-size:13px}
+}
+</style>
+</head>
+
+<body class="page-home">
+<header>
+  <div class="container navbar">
+    <a href="#home" class="logo nav-link" data-page="home">CSS <span>PrepHub</span></a>
+    <label for="menuToggle" class="menu-icon" aria-label="Open navigation menu">☰</label>
+    <input type="checkbox" id="menuToggle" class="menu-toggle" hidden>
+    <ul class="nav-links">
+      <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
+      <li><a href="#about" class="nav-link" data-page="about">About</a></li>
+      <li><a href="#subjects" class="nav-link" data-page="subjects">CSS Past Papers</a></li>
+      <li><a href="#syllabus" class="nav-link" data-page="syllabus">Syllabus</a></li>
+      <li><a href="#mpt" class="nav-link" data-page="mpt">CSS MPT Past Papers</a></li>
+      <li><a href="#notes" class="nav-link" data-page="notes">Notes</a></li>
+      <li><a href="#books" class="nav-link" data-page="books">Books</a></li>
+      <li><a href="#feedback" class="nav-link" data-page="feedback">Feedback</a></li>
+      <li><a href="#faq" class="nav-link" data-page="faq">FAQ</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- HOME PAGE -->
+<section id="home" class="page page-home">
+  <div class="home-hero">
+    <div class="container home-hero-inner">
+      <div>
+        <div class="hero-badge"><span></span>Your CSS Preparation Hub</div>
+        <h1>Prepare <span class="gold">Smarter.</span><br>Study <span class="blue">Better.</span><br>Achieve Your CSS Goals.</h1>
+        <p class="home-hero-text">CSS PrepHub brings your essential CSS preparation resources together in one organised platform — subject-wise CSS past papers from 2015 to 2026, CSS MPT past papers, syllabus, notes and books.</p>
+        <div class="home-buttons">
+          <a href="#subjects" class="home-btn home-btn-primary nav-link" data-page="subjects">Explore Past Papers →</a>
+          <a href="#syllabus" class="home-btn home-btn-outline nav-link" data-page="syllabus">View CSS Syllabus</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-circle"></div>
+        <div class="hero-dashboard">
+          <div class="dashboard-top"><div class="dashboard-logo">CSS <span>PrepHub</span></div><div class="dashboard-status">READY TO STUDY</div></div>
+          <div class="dashboard-main"><small>YOUR PREPARATION</small><h3>CSS Resources</h3><div class="dashboard-line"><span></span></div></div>
+          <div class="dashboard-items">
+            <div class="dashboard-item"><strong>📚 Past Papers</strong><small>2015–2026</small></div>
+            <div class="dashboard-item"><strong>📝 Notes</strong><small>Study Material</small></div>
+            <div class="dashboard-item"><strong>🎯 CSS MPT Papers</strong><small>2015–2026</small></div>
+            <div class="dashboard-item"><strong>📖 Books</strong><small>Resources</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="home-stats"><div class="container"><div class="home-stats-box">
+    <div class="home-stat"><strong>2015–2026</strong><span>Past Paper Years</span></div>
+    <div class="home-stat"><strong>7+</strong><span>Compulsory Subjects</span></div>
+    <div class="home-stat"><strong>7</strong><span>Optional Groups</span></div>
+    <div class="home-stat"><strong>24/7</strong><span>Online Access</span></div>
+  </div></div></div>
+  <section class="home-resources"><div class="container">
+    <div class="home-section-heading"><div class="home-section-label">Everything in One Place</div><h2>Your Complete CSS Preparation Toolkit</h2><p>Find the resources you need for revision, practice and preparation without searching through multiple websites.</p></div>
+    <div class="home-resource-grid">
+      <div class="home-resource-card"><div class="card-icon">📚</div><h3>CSS Past Papers</h3><p>Explore compulsory and optional subject-wise CSS past papers from 2015 to 2026.</p><a href="#subjects" class="home-resource-link nav-link" data-page="subjects">Explore Papers →</a></div>
+      <div class="home-resource-card"><div class="card-icon">📋</div><h3>Complete Syllabus</h3><p>Access the CSS syllabus PDF and understand the subjects you need to prepare.</p><a href="#syllabus" class="home-resource-link nav-link" data-page="syllabus">View Syllabus →</a></div>
+      <div class="home-resource-card"><div class="card-icon">🎯</div><h3>CSS MPT Past Papers</h3><p>Browse the year-wise CSS MPT past-paper section from 2022 to 2026.</p><a href="#mpt" class="home-resource-link nav-link" data-page="mpt">Explore MPT Papers →</a></div>
+      <div class="home-resource-card"><div class="card-icon">📝</div><h3>Study Notes</h3><p>Keep important study notes organised and easily accessible for revision.</p><a href="#notes" class="home-resource-link nav-link" data-page="notes">View Notes →</a></div>
+      <div class="home-resource-card"><div class="card-icon">📖</div><h3>Recommended Books</h3><p>Discover useful reading resources for different areas of CSS preparation.</p><a href="#books" class="home-resource-link nav-link" data-page="books">View Books →</a></div>
+      <div class="home-resource-card"><div class="card-icon">💡</div><h3>Smart Preparation</h3><p>Keep your preparation material organised so you can focus more on studying.</p><a href="#about" class="home-resource-link nav-link" data-page="about">Learn More →</a></div>
+    </div>
+  </div></section>
+  <section class="home-why"><div class="container home-why-grid">
+    <div class="home-why-visual"><div class="why-center">CSS<br><span>PrepHub</span></div></div>
+    <div class="home-why-content"><div class="home-section-label">Why CSS PrepHub?</div><h2>Everything Organised for Your Preparation</h2><p>Instead of looking for resources in different places, CSS PrepHub gives aspirants a simple and organised starting point.</p>
+      <div class="why-list">
+        <div class="why-item"><div class="why-check">✓</div><div><strong>Subject-wise Resources</strong><span>Find material according to your subject.</span></div></div>
+        <div class="why-item"><div class="why-check">✓</div><div><strong>Past Paper Practice</strong><span>Review previous CSS examination papers.</span></div></div>
+        <div class="why-item"><div class="why-check">✓</div><div><strong>Easy PDF Access</strong><span>View or download available resources.</span></div></div>
+        <div class="why-item"><div class="why-check">✓</div><div><strong>Mobile Friendly</strong><span>Use the platform on desktop or mobile.</span></div></div>
+        <div class="why-item"><div class="why-check">✓</div><div><strong>Simple Navigation</strong><span>Move between preparation sections easily.</span></div></div>
+        <div class="why-item"><div class="why-check">✓</div><div><strong>One Preparation Hub</strong><span>Keep essential resources in one place.</span></div></div>
+      </div>
+    </div>
+  </div></section>
+  <section class="home-cta"><div class="container"><div class="home-cta-box"><div class="home-cta-content"><h2>Ready to Start Your CSS Preparation?</h2><p>Explore past papers, syllabus and preparation resources available on CSS PrepHub.</p></div><a href="#subjects" class="home-btn home-btn-primary nav-link" data-page="subjects">Start Exploring →</a></div></div></section>
+</section>
+
+<!-- ABOUT PAGE -->
+<section id="about" class="page page-about">
+  <div class="page-header"><div class="container"><h1>About CSS PrepHub</h1><p>A simple platform designed for CSS aspirants.</p></div></div>
+  <div class="section"><div class="container about-grid">
+    <div class="about-box"><h2>About the Platform</h2><p>CSS PrepHub is an online preparation platform created to bring important CSS preparation resources together in one place.</p><p>Students can explore past papers, syllabus, CSS MPT past papers, notes and recommended books.</p><ul class="feature-list"><li>Subject-wise CSS past papers</li><li>Complete CSS syllabus</li><li>Year-wise CSS MPT past papers</li><li>Study notes and recommended books</li><li>Responsive design for mobile and desktop</li></ul></div>
+    <div class="about-box"><h2>Our Purpose</h2><p>The purpose of CSS PrepHub is to make CSS preparation resources easier to access and organise.</p><p>The platform can be used by aspirants for revision, past-paper practice and preparation planning.</p></div>
+  </div></div>
+</section>
+
+<!-- CSS PAST PAPERS PAGE -->
+<section id="subjects" class="page page-subjects">
+  <div class="page-header"><div class="container"><h1>CSS Past Papers</h1><p>Select a subject to view past papers from 2015–2026.</p></div></div>
+  <div class="section"><div class="container">
+    <div id="subjectList"><div class="section-title"><h2>Compulsory Subjects</h2><p>Select a subject to open its past papers.</p></div><div id="compulsoryGrid" class="subject-grid"></div>
+      <div class="optional-title"><h2>Optional Subjects</h2><p style="color:var(--muted);margin-top:5px">Select a subject from Groups I–VII to view its past papers.</p></div><div id="optionalGroups" class="optional-groups-grid"></div>
+    </div>
+    <div id="papersArea" class="subject-section"><button class="back-btn" onclick="backToSubjects()">← Back to CSS Past Papers</button><div class="section-title"><h2 id="selectedSubjectTitle">Past Papers</h2><p>View or download the required year.</p></div><div id="yearGrid" class="year-grid"></div></div>
+  </div></div>
+</section>
+
+<!-- SYLLABUS PAGE -->
+<section id="syllabus" class="page page-syllabus">
+  <div class="page-header"><div class="container"><h1>CSS Syllabus</h1><p>Complete CSS syllabus in PDF format.</p></div></div>
+  <div class="section"><div class="container"><div class="pdf-grid"><div class="pdf-box"><div class="card-icon" style="margin:0 auto 18px">📋</div><h3>Complete CSS Syllabus PDF</h3><p>View or download the complete CSS syllabus.</p><div class="pdf-buttons"><button class="small-btn view-btn" onclick="openPDF('css-syllabus.pdf','Complete CSS Syllabus')">View</button><a class="small-btn download-btn" href="css-syllabus.pdf" download>Download</a></div></div></div></div></div>
+</section>
+
+<!-- CSS MPT PAST PAPERS PAGE -->
+<section id="mpt" class="page page-mpt">
+  <div class="page-header"><div class="container"><h1>CSS MPT Past Papers</h1><p>Choose a year to view or download that year's CSS MPT past paper.</p></div></div>
+  <div class="section"><div class="container"><div class="section-title"><h2>CSS MPT Past Papers (2022–2026)</h2><p>Choose one of the five years from 2022 to 2026. Add the matching PDF file to the website folder and use the same filename shown in that box.</p></div><div id="mptYearGrid" class="year-grid"></div></div></div>
+</section>
+
+<!-- NOTES PAGE -->
+<section id="notes" class="page page-notes">
+  <div class="page-header"><div class="container"><h1>CSS Notes</h1><p>Useful study notes for CSS aspirants.</p></div></div>
+  <div class="section"><div class="container"><div id="notesGrid" class="pdf-grid"></div></div></div>
+</section>
+
+<!-- BOOKS PAGE: SIX RESOURCE BOXES -->
+<section id="books" class="page page-books">
+  <div class="page-header"><div class="container"><h1>Recommended CSS Books</h1><p>Useful reading resources for different areas of CSS preparation.</p></div></div>
+  <div class="section"><div class="container"><div id="booksGrid" class="pdf-grid"></div></div></div>
+</section>
+
+<!-- FEEDBACK PAGE -->
+<section id="feedback" class="page page-feedback">
+  <div class="page-header"><div class="container"><h1>Visitor Feedback</h1><p>Share your experience with CSS PrepHub.</p></div></div>
+  <div class="section"><div class="container">
+    <form id="feedbackForm" class="feedback-form">
+      <div class="form-group"><label for="feedbackName">Name</label><input type="text" id="feedbackName" placeholder="Enter your name" required></div>
+      <div class="form-group"><label for="feedbackRating">Rating</label><select id="feedbackRating" required><option value="">Select rating</option><option value="5">★★★★★ Excellent</option><option value="4">★★★★ Very Good</option><option value="3">★★★ Good</option><option value="2">★★ Needs Improvement</option><option value="1">★ Poor</option></select></div>
+      <div class="form-group"><label for="feedbackType">Feedback Type</label><select id="feedbackType" required><option value="">Select feedback type</option><option value="Suggestion">Suggestion</option><option value="Website">Website</option><option value="Content">Content</option><option value="Other">Other</option></select></div>
+      <div class="form-group"><label for="feedbackText">Message</label><textarea id="feedbackText" placeholder="Write your feedback..." required></textarea></div>
+      <button type="submit" class="small-btn view-btn">Submit Feedback</button><div id="feedbackMessage"></div>
+    </form>
+    <div id="feedbackEntries" class="feedback-message"></div>
+  </div></div>
+</section>
+
+<!-- FAQ PAGE: REWRITTEN QUESTIONS AND STYLED PLUS/MINUS ACCORDION -->
+<section id="faq" class="page page-faq">
+  <div class="page-header"><div class="container"><h1>Frequently Asked Questions</h1><p>Clear answers to help you use CSS PrepHub with confidence.</p></div></div>
+  <div class="section"><div class="container">
+    <div class="faq-intro"><span class="eyebrow">Need a little help?</span><h2>How can we help you?</h2><p>Choose a question below to read a simple answer about the website and its study resources.</p></div>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-question-text"><span class="faq-number">01</span>What is CSS PrepHub?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer">CSS PrepHub is an online resource platform for CSS aspirants. It brings together subject-wise past papers, the CSS syllabus, CSS MPT past papers, study notes and recommended books in one organised place.</div></div>
+      <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-question-text"><span class="faq-number">02</span>Which years of CSS past papers are available?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer">The CSS past-paper section provides year boxes for <strong>2015 to 2026</strong>. A specific paper will open or download only after its PDF file has been added to the website folder using the correct filename.</div></div>
+      <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-question-text"><span class="faq-number">03</span>How do I find a paper for a particular subject?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer">Open <strong>CSS Past Papers</strong>, select a compulsory subject or an optional subject from Groups I–VII, and then choose the required year. Use the <strong>View PDF</strong> button to open the paper or <strong>Download</strong> to save it.</div></div>
+      <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-question-text"><span class="faq-number">04</span>Which years are available on the CSS MPT Past Papers page?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer">The <strong>CSS MPT Past Papers</strong> page has separate boxes for <strong>2022 to 2026</strong>. Each paper requires its matching PDF file, named according to the filename used by the website, to be uploaded before it can be viewed or downloaded.</div></div>
+      <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-question-text"><span class="faq-number">05</span>Why is a PDF not opening or downloading?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer">The PDF may not have been uploaded, or its filename may not match the website's expected filename. Place the PDF in the same folder as <strong>index.html</strong> and check the exact spelling of the filename. The syllabus, notes and books also need their matching PDF files uploaded.</div></div>
+    </div>
+    <div class="faq-bottom-note"><strong>Quick tip:</strong> If a resource does not open, first check that the matching PDF is uploaded and that its filename is spelled exactly as expected.</div>
+  </div></div>
+</section>
+
+<!-- FOOTER -->
+<footer><div class="container">
+  <div class="footer-grid">
+    <div class="footer-col"><h3>CSS PrepHub</h3><p>A preparation platform for CSS aspirants with past papers, notes, books, syllabus and CSS MPT past papers.</p></div>
+    <div class="footer-col"><h3>Quick Links</h3><ul><li><a href="#home" class="nav-link" data-page="home">Home</a></li><li><a href="#subjects" class="nav-link" data-page="subjects">CSS Past Papers</a></li><li><a href="#syllabus" class="nav-link" data-page="syllabus">Syllabus</a></li><li><a href="#notes" class="nav-link" data-page="notes">Notes</a></li></ul></div>
+    <div class="footer-col"><h3>Resources</h3><ul><li><a href="#mpt" class="nav-link" data-page="mpt">CSS MPT Past Papers</a></li><li><a href="#books" class="nav-link" data-page="books">Books</a></li><li><a href="#feedback" class="nav-link" data-page="feedback">Feedback</a></li><li><a href="#faq" class="nav-link" data-page="faq">FAQ</a></li></ul></div>
+  </div>
+  <div class="copyright">© 2026 CSS PrepHub. All Rights Reserved.</div>
+</div></footer>
+
+<!-- PDF MODAL -->
+<div id="pdfModal" class="modal"><div class="pdf-viewer"><div class="pdf-topbar"><h3 id="pdfTitle">PDF Viewer</h3><div class="pdf-top-buttons"><a id="pdfDownload" class="pdf-download" href="#" download>Download</a><button class="pdf-close" onclick="closePDF()">Close</button></div></div><iframe id="pdfFrame" title="PDF Viewer"></iframe></div></div>
+
+<script>
+/* =========================================================
+   10. WEBSITE DATA — EDIT RESOURCE NAMES AND FILENAMES HERE
+   ========================================================= */
+const YEARS=Array.from({length:12},(_,i)=>2015+i);
+
+const compulsorySubjects=[
+  {name:"CSS English Essay",prefix:"english-essay"},
+  {name:"CSS English Precis & Composition",prefix:"english-precis"},
+  {name:"CSS General Science & Ability",prefix:"gsa"},
+  {name:"CSS Current Affairs",prefix:"current-affairs"},
+  {name:"CSS Pakistan Affairs",prefix:"pakistan-affairs"},
+  {name:"CSS Islamic Studies",prefix:"islamic-studies"},
+  {name:"CSS Comparative Study of Major Religions",prefix:"comparative-study-major-religions"}
+];
+
+const optionalGroups=[
+  {title:"Group I",subjects:[{name:"CSS Accountancy & Auditing",slug:"accountancy-auditing"},{name:"CSS Economics",slug:"economics"},{name:"CSS Computer Science",slug:"computer-science"},{name:"CSS Political Science",slug:"political-science"},{name:"CSS International Relations",slug:"international-relations"}]},
+  {title:"Group II",subjects:[{name:"CSS Physics",slug:"physics"},{name:"CSS Chemistry",slug:"chemistry"},{name:"CSS Applied Mathematics",slug:"applied-mathematics"},{name:"CSS Pure Mathematics",slug:"pure-mathematics"},{name:"CSS Statistics",slug:"statistics"},{name:"CSS Geology",slug:"geology"}]},
+  {title:"Group III",subjects:[{name:"CSS Business Administration",slug:"business-administration"},{name:"CSS Public Administration",slug:"public-administration"},{name:"CSS Governance & Public Policies",slug:"governance-public-policies"},{name:"CSS Town Planning & Urban Management",slug:"town-planning-urban-management"}]},
+  {title:"Group IV",subjects:[{name:"CSS History of Pakistan & India",slug:"history-pakistan-india"},{name:"CSS Islamic History & Culture",slug:"history-islamic-culture"},{name:"CSS British History",slug:"british-history"},{name:"CSS European History",slug:"history-europe"},{name:"CSS History of USA",slug:"history-usa"}]},
+  {title:"Group V",subjects:[{name:"CSS Gender Studies",slug:"gender-studies"},{name:"CSS Environmental Sciences",slug:"environmental-sciences"},{name:"CSS Agriculture & Forestry",slug:"agriculture-forestry"},{name:"CSS Botany",slug:"botany"},{name:"CSS Zoology",slug:"zoology"}]},
+  {title:"Group VI",subjects:[{name:"CSS Law",slug:"law"},{name:"CSS Constitutional Law",slug:"constitutional-law"},{name:"CSS International Law",slug:"international-law"},{name:"CSS Muslim Law & Jurisprudence",slug:"muslim-law"},{name:"CSS Mercantile Law",slug:"mercantile-law"},{name:"CSS Criminology",slug:"criminology"},{name:"CSS Philosophy",slug:"philosophy"}]},
+  {title:"Group VII",subjects:[{name:"CSS Journalism & Mass Communication",slug:"journalism-mass-communication"},{name:"CSS Psychology",slug:"psychology"},{name:"CSS Geography",slug:"geography"},{name:"CSS Sociology",slug:"sociology"},{name:"CSS Punjabi",slug:"punjabi"},{name:"CSS Sindhi",slug:"sindhi"},{name:"CSS Pashto",slug:"pashto"}]}
+];
+
+const notesData=[
+  {name:"English Grammar ",file:"english-grammar-notes.pdf"},
+  {name:"English Precis Notes",file:"english-precis-notes.pdf"},
+  {name:"General Science & Ability Notes",file:"general-science-ability-notes.pdf"},
+  {name:"Current Affairs Notes",file:"current-affairs-notes.pdf"},
+  {name:"Pakistan Affairs Notes",file:"pakistan-affairs-notes.pdf"},
+  {name:"Islamic Studies Notes",file:"islamic-studies-notes.pdf"}
+];
+
+/* Six book boxes — change these names or filenames whenever needed. */
+const booksData=[
+  {name:"International Relations Books",file:"international-relations-books.pdf"},
+  {name:"English Grammar Books",file:"english-grammar-books.pdf"},
+  {name:"Political Science Books",file:"political-science-books.pdf"},
+  {name:"Gender Studies Books",file:"gender-studies-books.pdf"},
+  {name:"Sociology Books",file:"sociology-books.pdf"},
+  {name:"Environmental Science Books",file:"environmental-science-books.pdf"}
+];
+
+const MPT_PREFIX="css-mpt";
+const MPT_YEARS=[2022,2023,2024,2025,2026];
+
+/* =========================================================
+   11. NAVIGATION AND GOOGLE ANALYTICS
+   ========================================================= */
+function trackPageView(page){
+  if(typeof gtag!=="function")return;
+  const names={home:"Home",about:"About",subjects:"CSS Past Papers",syllabus:"Syllabus",mpt:"CSS MPT Past Papers",notes:"Notes",books:"Books",feedback:"Feedback",faq:"FAQ"};
+  gtag("event","page_view",{page_title:names[page]||page,page_location:location.origin+location.pathname+"#"+page,page_path:location.pathname+"#"+page});
+}
+function showCSSPrepHubPage(page){
+  const valid=["home","about","subjects","syllabus","mpt","notes","books","feedback","faq"];
+  if(!valid.includes(page))page="home";
+  document.body.className="page-"+page;
+  document.querySelectorAll(".nav-link").forEach(a=>a.classList.toggle("active",a.dataset.page===page));
+  if(page!=="subjects"){
+    document.getElementById("subjectList").style.display="block";
+    document.getElementById("papersArea").classList.remove("active");
+  }
+  document.getElementById("menuToggle").checked=false;
+  window.scrollTo({top:0,behavior:"smooth"});
+  trackPageView(page);
+  if(page==="feedback")loadFeedbackFromSheet();
+}
+document.querySelectorAll(".nav-link").forEach(a=>a.addEventListener("click",e=>{
+  e.preventDefault();
+  const page=a.dataset.page;
+  history.pushState(null,"","#"+page);
+  showCSSPrepHubPage(page);
+}));
+function loadHashPage(){showCSSPrepHubPage(location.hash.slice(1).trim()||"home")}
+window.addEventListener("hashchange",loadHashPage);
+window.addEventListener("popstate",loadHashPage);
+
+/* =========================================================
+   12. CSS PAST PAPER RENDERING
+   ========================================================= */
+function renderCompulsory(){
+  const grid=document.getElementById("compulsoryGrid");grid.innerHTML="";
+  compulsorySubjects.forEach(s=>{
+    const card=document.createElement("div");card.className="subject-card";
+    card.innerHTML=`<div class="card-icon">📘</div><h3>${s.name}</h3><p>View 2015–2026 past papers</p>`;
+    card.onclick=()=>openPastPapers(s.name,s.prefix);grid.appendChild(card);
+  });
+}
+function renderOptional(){
+  const container=document.getElementById("optionalGroups");container.innerHTML="";
+  optionalGroups.forEach(group=>{
+    const wrap=document.createElement("div");wrap.className="optional-group";
+    const heading=document.createElement("h3");heading.textContent=group.title;wrap.appendChild(heading);
+    const list=document.createElement("div");list.className="optional-list";
+    group.subjects.forEach(subject=>{
+      const item=document.createElement("div");item.className="optional-item";
+      const name=document.createElement("span");name.textContent=subject.name;
+      const button=document.createElement("button");button.className="small-btn view-btn";button.textContent="Past Papers";
+      button.onclick=()=>openPastPapers(subject.name,subject.slug);
+      item.append(name,button);list.appendChild(item);
+    });
+    wrap.appendChild(list);container.appendChild(wrap);
+  });
+}
+async function findExistingPDF(subjectName,prefix,year){
+  const clean=subjectName.replace(/&/g,"and").replace(/[\/\\:*?"<>|]/g,"").trim();
+  const lower=clean.toLowerCase().replace(/\s+/g,"-");
+  const under=clean.toLowerCase().replace(/\s+/g,"_");
+  const files=[prefix+"-"+year+".pdf",prefix+"_"+year+".pdf",prefix+" "+year+".pdf",lower+"-"+year+".pdf",lower+"_"+year+".pdf",lower+" "+year+".pdf",under+"_"+year+".pdf",clean+"-"+year+".pdf",clean+" "+year+".pdf"];
+  for(const file of [...new Set(files)]){
+    try{const response=await fetch(encodeURI(file),{method:"HEAD",cache:"no-store"});if(response.ok)return file}catch(error){}
+  }
+  return null;
+}
+function openPastPapers(name,prefix){
+  document.getElementById("subjectList").style.display="none";
+  document.getElementById("papersArea").classList.add("active");
+  document.getElementById("selectedSubjectTitle").textContent=name+" Past Papers";
+  const grid=document.getElementById("yearGrid");grid.innerHTML="";
+  document.querySelector(".pdf-error")?.remove();
+  YEARS.forEach(year=>{
+    const card=document.createElement("div");card.className="year-card";
+    card.innerHTML=`<h3>${year}</h3><div class="year-buttons"><button class="small-btn view-btn">View PDF</button><button class="small-btn download-btn">Download</button></div>`;
+    const [view,download]=card.querySelectorAll("button");
+    view.onclick=async()=>{
+      view.disabled=true;view.textContent="Checking...";
+      const file=await findExistingPDF(name,prefix,year);
+      view.disabled=false;view.textContent="View PDF";
+      if(file)openPDF(file,name+" "+year);else showPDFError(name,year,prefix);
+    };
+    download.onclick=async()=>{
+      download.disabled=true;download.textContent="Checking...";
+      const file=await findExistingPDF(name,prefix,year);
+      download.disabled=false;download.textContent="Download";
+      if(!file){showPDFError(name,year,prefix);return}
+      const link=document.createElement("a");link.href=encodeURI(file);link.download=file.split("/").pop();
+      document.body.appendChild(link);link.click();link.remove();
+      if(typeof gtag==="function")gtag("event","pdf_download",{file_name:file,file_title:name+" "+year});
+    };
+    grid.appendChild(card);
+  });
+  window.scrollTo({top:0,behavior:"smooth"});
+  if(typeof gtag==="function")gtag("event","past_papers_subject",{subject:name,page_title:name+" Past Papers"});
+}
+function showPDFError(name,year,prefix){
+  document.querySelector(".pdf-error")?.remove();
+  const error=document.createElement("div");error.className="pdf-error";
+  error.innerHTML=`<strong>PDF file not found</strong><p>${escapeHTML(name)} (${year}) ki PDF website folder mein nahi mili.</p><code>${escapeHTML(prefix+"-"+year+".pdf")}</code><p style="margin-top:10px;font-size:13px;color:var(--muted)">Make sure the PDF is uploaded in the same folder as index.html.</p>`;
+  document.getElementById("yearGrid").before(error);
+}
+function backToSubjects(){
+  document.getElementById("papersArea").classList.remove("active");
+  document.getElementById("subjectList").style.display="block";
+  document.querySelector(".pdf-error")?.remove();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* =========================================================
+   13. PDF VIEWER, MPT PAPERS, NOTES AND BOOKS
+   ========================================================= */
+function openPDF(file,title){
+  document.getElementById("pdfTitle").textContent=title;
+  document.getElementById("pdfFrame").src=encodeURI(file)+"?v="+Date.now();
+  const download=document.getElementById("pdfDownload");
+  download.href=encodeURI(file);download.setAttribute("download","");
+  document.getElementById("pdfModal").classList.add("show");
+  document.body.style.overflow="hidden";
+  if(typeof gtag==="function")gtag("event","pdf_view",{file_name:file,file_title:title});
+}
+function closePDF(){
+  document.getElementById("pdfModal").classList.remove("show");
+  document.getElementById("pdfFrame").src="";
+  document.body.style.overflow="";
+}
+function renderYearPapers(){
+  const grid=document.getElementById("mptYearGrid");grid.innerHTML="";
+  MPT_YEARS.forEach(year=>{
+    const file=`${MPT_PREFIX}-${year}.pdf`;
+    const box=document.createElement("div");box.className="mpt-paper-box";
+    box.innerHTML=`<div class="mpt-paper-name">MPT Past Paper</div><div class="mpt-paper-year">${year}</div><div class="year-buttons"><button class="small-btn view-btn" type="button">View PDF</button><a class="small-btn download-btn" href="${encodeURI(file)}" download>Download</a></div>`;
+    box.querySelector("button").onclick=()=>openPDF(file,"MPT Past Paper "+year);
+    grid.appendChild(box);
+  });
+}
+function renderPDFCards(id,data,icon,description){
+  const grid=document.getElementById(id);grid.innerHTML="";
+  data.forEach(item=>{
+    const box=document.createElement("div");box.className="pdf-box";
+    box.innerHTML=`<div class="card-icon" style="margin:0 auto 18px">${icon}</div><h3>${item.name}</h3><p>${description}</p><div class="pdf-buttons"><button class="small-btn view-btn">View</button><a class="small-btn download-btn" href="${encodeURI(item.file)}" download>Download</a></div>`;
+    box.querySelector("button").onclick=()=>openPDF(item.file,item.name);
+    grid.appendChild(box);
+  });
+}
+function escapeHTML(value){
+  return String(value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+}
+
+/* =========================================================
+   14. FEEDBACK — CONNECT YOUR GOOGLE APPS SCRIPT WEB APP URL
+   ========================================================= */
+const FEEDBACK_API_URL="PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+function loadFeedbackFromSheet(){
+  const box=document.getElementById("feedbackEntries");if(!box)return;
+  if(!FEEDBACK_API_URL||FEEDBACK_API_URL==="PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE"){
+    box.innerHTML='<p style="text-align:center;color:var(--muted)">Feedback system is not connected yet.</p>';return;
+  }
+  box.innerHTML='<p style="text-align:center;color:var(--muted)">Loading feedback...</p>';
+  const callbackName="cssPrepHubFeedback_"+Date.now();
+  window[callbackName]=data=>{renderFeedback(data||[]);document.getElementById(callbackName)?.remove();delete window[callbackName]};
+  const script=document.createElement("script");script.id=callbackName;
+  script.src=FEEDBACK_API_URL+"?action=getFeedback&callback="+encodeURIComponent(callbackName)+"&t="+Date.now();
+  script.onerror=()=>{box.innerHTML='<p style="text-align:center;color:#b42318">Unable to load feedback. Please try again later.</p>';script.remove();delete window[callbackName]};
+  document.body.appendChild(script);
+}
+function renderFeedback(data){
+  const box=document.getElementById("feedbackEntries");
+  if(!Array.isArray(data)||!data.length){
+    box.innerHTML='<h2 style="margin:35px 0 20px;color:var(--navy)">Recent Feedback</h2><p style="text-align:center;color:var(--muted)">No feedback submitted yet.</p>';return;
+  }
+  box.innerHTML=`<h2 style="margin:35px 0 20px;color:var(--navy)">Recent Feedback</h2><p style="text-align:center;color:var(--blue);font-weight:bold;margin-bottom:20px">Feedback Count: ${data.length}</p>`;
+  data.slice().reverse().forEach(item=>{
+    const entry=document.createElement("div");entry.className="feedback-entry";
+    const rating=Math.max(0,Math.min(5,Number(item.rating)||0));
+    entry.innerHTML=`<strong>${escapeHTML(item.name||"Anonymous")}</strong><p>${"★".repeat(rating)}${"☆".repeat(5-rating)}</p><small>${escapeHTML(item.type||"Feedback")}</small><p style="margin-top:8px">${escapeHTML(item.message||"")}</p>`;
+    box.appendChild(entry);
+  });
+}
+document.getElementById("feedbackForm").addEventListener("submit",async function(event){
+  event.preventDefault();
+  const name=document.getElementById("feedbackName").value.trim();
+  const rating=document.getElementById("feedbackRating").value;
+  const type=document.getElementById("feedbackType").value;
+  const message=document.getElementById("feedbackText").value.trim();
+  const box=document.getElementById("feedbackMessage");
+  const button=this.querySelector('button[type="submit"]');
+  if(!name||!rating||!type||!message)return;
+  if(FEEDBACK_API_URL==="PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE"){
+    box.innerHTML='<p style="color:#b42318;font-weight:bold">Feedback system is not connected yet.</p>';return;
+  }
+  button.disabled=true;button.textContent="Submitting...";
+  try{
+    await fetch(FEEDBACK_API_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({name,rating,type,message,date:new Date().toISOString()})});
+    box.innerHTML='<p style="color:var(--blue);font-weight:bold">Thank you! Your feedback has been submitted.</p>';
+    this.reset();
+    if(typeof gtag==="function")gtag("event","feedback_submit",{feedback_type:type,rating});
+    setTimeout(loadFeedbackFromSheet,1200);
+  }catch(error){
+    box.innerHTML='<p style="color:#b42318;font-weight:bold">Feedback could not be submitted. Please try again.</p>';
+  }finally{
+    button.disabled=false;button.textContent="Submit Feedback";
+  }
+});
+
+/* =========================================================
+   15. FAQ ACCORDION AND SMALL INTERACTIONS
+   ========================================================= */
+document.querySelectorAll(".faq-question").forEach(question=>{
+  question.addEventListener("click",function(){
+    const item=this.closest(".faq-item");
+    const willOpen=!item.classList.contains("open");
+    item.classList.toggle("open",willOpen);
+    this.setAttribute("aria-expanded",String(willOpen));
+    this.querySelector(".faq-toggle").textContent=willOpen?"−":"+";
+  });
+});
+document.getElementById("pdfModal").addEventListener("click",event=>{
+  if(event.target===event.currentTarget)closePDF();
+});
+document.addEventListener("keydown",event=>{if(event.key==="Escape")closePDF()});
+document.addEventListener("click",event=>{
+  const link=event.target.closest("a[download]");
+  if(!link||typeof gtag!=="function")return;
+  gtag("event","pdf_download",{
+    file_name:link.getAttribute("href")||"",
+    file_title:link.closest(".pdf-box")?.querySelector("h3")?.textContent.trim()||link.closest(".year-card")?.querySelector("h3")?.textContent.trim()||link.getAttribute("href"),
+    page_location:location.href
+  });
+});
+
+/* =========================================================
+   16. START THE WEBSITE
+   ========================================================= */
+renderCompulsory();
+renderOptional();
+renderYearPapers();
+renderPDFCards("notesGrid",notesData,"📝","CSS study notes");
+renderPDFCards("booksGrid",booksData,"📖","Recommended CSS reading material");
+loadHashPage();
+</script>
+</body>
+</html>
